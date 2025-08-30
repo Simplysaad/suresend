@@ -17,15 +17,9 @@ const userSchema = Schema(
     },
     role: {
       type: String,
-      enum: ["student", "instructor", "admin"],
-      default: "student"
+      enum: ["client", "admin"],
+      default: "client"
     },
-    profilePicture: String,
-    bio: String,
-    enrollments: {
-      type: Schema.Types.ObjectId,
-      ref: "enrollment"
-    }
   },
   {
     timestamps: true
