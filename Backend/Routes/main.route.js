@@ -13,12 +13,24 @@ router.post("/order", async (req, res, next) => {
       });
     }
 
+    const { senderName, senderPhoneNumber, receiverName, receiverPhoneNumber } =
+      req.body;
+
+    // const orderId = 
+
     const newOrder = new Order({
+      sender: {
+        name: senderName,
+        phoneNumber: senderPhoneNumber
+      },
+      reciever: {
+        name: receiverName,
+        phoneNumber: receiverPhoneNumber
+      },
       ...req.body
     });
 
     await newOrder.save();
-
   } catch (err) {
     next(err);
   }

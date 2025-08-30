@@ -15,6 +15,7 @@ const orderSchema = Schema(
     orderId: String,
     sender: userId || user,
     receiver: userId || user,
+    
     pickupAddress: String,
     dropoffAddress: String,
     goodsType: String,
