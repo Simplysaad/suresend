@@ -1,7 +1,7 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const userId = {
-  type: mongoose.Schema.Type.ObjectId,
+  type: Schema.Types.ObjectId,
   ref: "user"
 };
 const user = {
@@ -10,12 +10,11 @@ const user = {
   phoneNumber: String
 };
 
-const orderSchema = Schema(
+const orderSchema = new Schema(
   {
     orderId: String,
-    sender: userId || user,
-    receiver: userId || user,
-    
+    sender: user,
+    receiver: user,
     pickupAddress: String,
     dropoffAddress: String,
     goodsType: String,
@@ -25,16 +24,20 @@ const orderSchema = Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "delivered"],
+      enum: ["pending", "processing", "delivered"],
       default: "pending"
     },
     description: String,
-    additionNotes: String
+    additionNotes: String,
+    payment: {
+      id: Number,
+      reference: String
+    }
   },
   {
     timestamps: true
   }
 );
 
-const Order = model("user", orderSchema);
+const Order = model("order", orderSchema);
 export default Order;
